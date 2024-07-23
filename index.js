@@ -21,7 +21,7 @@ db.on("error", (e) => {
 app.use(bodyParser.json())
 app.use(mainRouter)
 app.get("/", (req, res) => {
-    res.status(200).json("Welcome App is working")
+    res.status(200).json("Welcome Auth App is working")
 })
 
 app.listen(5000 || process.env.port, () => {
