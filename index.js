@@ -24,6 +24,9 @@ app.get("/", (req, res) => {
     res.status(200).json("Welcome Auth App is working")
 })
 
-app.listen(5000 || process.env.port, () => {
-    console.log("App is listening at port ", 5000)
-})
+const server = app.listen(5000 || process.env.port, () => {
+    console.log("App is listening at port ", 5000 || process.env.port);
+});
+
+
+module.exports = server

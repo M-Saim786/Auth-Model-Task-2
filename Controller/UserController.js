@@ -45,8 +45,12 @@ exports.signUp = async (req, res) => {
         sendEmail(
             email,
             "Otp Verification ",
-            `<h1>Verify Account</h1>
-            <p>your otp is : ${otp}</p>`
+            `<div>
+             <h1>Verify Account</h1>
+             <p>your token is : ${token}</p>
+             <p>your otp is : ${otp}</p>
+            </div>
+            `
         )
 
         return res.status(200).json({
@@ -104,7 +108,8 @@ exports.verifyOTP = async (req, res) => {
                     isVerify: true
                 })
                 return res.status(200).json({
-                    message: "Otp Verify Success "
+                    message: "OTP verified",
+                    status: true
                 })
             })
 
@@ -157,10 +162,7 @@ exports.login = async (req, res) => {
             return res.status(401).json({
                 message: "Incorrect Password",
             })
-
         })
-
-
 
     } catch (err) {
         return res.status(500).json({
@@ -189,8 +191,11 @@ exports.forgetPassword = async (req, res) => {
         sendEmail(
             email,
             "Forget Password ",
-            `<h1>Forget Password</h1>
-            <p>your password reset token is : <b>${token}</b></p>`
+            `<div>
+             <h1>Forget Password</h1>
+            <p>your password reset token is : <b>${token}</b></p>
+            </div>
+            `
         )
 
         return res.status(200).json({
@@ -238,7 +243,7 @@ exports.updatePassword = async (req, res) => {
                 password: newPassword
             })
             return res.status(200).json({
-                message: "Password updated ",
+                message: "Password updated successfully",
                 data: userFind
             })
         })
