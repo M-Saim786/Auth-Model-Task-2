@@ -1,6 +1,5 @@
-// __tests__/apiTests.js
 const request = require('supertest');
-const server = require('../index'); // Adjust the path to your server file
+const app = require('../index'); // Adjust the path to your server file
 
 const email = "saim@yopmail.com"
 const resetToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjY4NzBlMjVjN2NiNWJlOTk3NTIzMmMwIiwiaWF0IjoxNzIxODk4MjI5LCJleHAiOjE3MjE5MDU0Mjl9.-VdpkGoKARuakQt0ZFEck1oGooVOu7jZT4-aXvC4C3g"
@@ -13,6 +12,16 @@ const password = "newpassword123"
 
 
 describe('API Routes', () => {
+
+    let server;
+    beforeAll((done) => {
+        const port = 4000; // Use a different port for testing
+        server = app.listen(port, () => {
+            global.agent = request.agent(server); // Use a global agent to reuse the same connection
+            done();
+        });
+    });
+
     afterAll(() => {
         server.close();
     });
